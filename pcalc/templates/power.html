@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Power of Lamp in Incandescent Bulb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+
+</head>
+
+<body>
+    <div class="box">
+        <h1>Power of Lamp in Incandescent Bulb</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <span class="label">Intensity:</span>
+                <input type="text" name="Intensity" value="{{ I }}" placeholder="Enter current (A)"> (in A)
+            </div>
+
+            <div>
+                <span class="label">Resistance:</span>
+                <input type="text" name="Resistence" value="{{ R }}" placeholder="Enter resistance (Ω)"> (in Ω)
+            </div>
+
+            <div>
+                <span class="label">Power:</span>
+                <input type="text" name="Power" value="{{ Power }}" readonly> W
+            </div>
+
+            <div>
+                <input type="submit" value="Calculate">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
