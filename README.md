@@ -1,5 +1,5 @@
-# Ex.05 Design a Website for Server Side Processing
-## Date:
+# Ex-05 Design a Website for Server Side Processing
+## Date: 24-10-2025
 
 ## AIM:
  To design a website to calculate the power of a lamp filament in an incandescent bulb in the server side. 
@@ -80,6 +80,7 @@ Publish the website in the given URL.
 
 </html>
 ```
+</details>
 <details>
 <summary> APP.CSS</summary>
 
@@ -140,10 +141,13 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 ```
+</details>
+
+
 ## SERVER SIDE PROCESSING:
 
 <details>
-<summary> Django Files</summary>
+<summary> Django Files</summary><br>
 
 <details>
 <summary> views.py</summary>
@@ -168,34 +172,23 @@ def powerlamp(request):
         context['R'] = R
         print('Power=', Power)
     return render(request, 'power.html', context)
-</details>
 ```
+</details>
 
 <details>
 <summary>urls.py (app)</summary>
 
 ```python
-from django.shortcuts import render
+from django.urls import path
+from . import views
 
-def powerlamp(request):
-    context = {}
-    context['Power'] = ""
-    context['I'] = ""
-    context['R'] = ""
-    if request.method == 'POST':
-        print("POST method is used")
-        I = request.POST.get('Intensity', '')
-        R = request.POST.get('Resistence', '')
-        print('Intensity=', I)
-        print('Resistence=', R)
-        Power = int(I) * int(I) * int(R)
-        context['Power'] = Power
-        context['I'] = I
-        context['R'] = R
-        print('Power=', Power)
-    return render(request, 'power.html', context)
-</details>
+urlpatterns = [
+    path('', views.powerlamp, name='powerlamp'),
+]
+
+
 ```
+</details>
 <details>
 <summary>urls.py (project)</summary>
 
@@ -207,8 +200,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pcalc.urls')),
 ]
-</details>
+
 ```
+</details>
 </details>
 
 ## HOMEPAGE:
