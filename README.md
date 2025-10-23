@@ -33,11 +33,188 @@ Publish the website in the given URL.
 
 ## PROGRAM :
 
+<details>
+<summary> POWER.HTML</summary>
 
+ ```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Power of Lamp in Incandescent Bulb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+
+</head>
+
+<body>
+    <div class="box">
+        <h1>Power of Lamp in Incandescent Bulb</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <span class="label">Intensity:</span>
+                <input type="text" name="Intensity" value="{{ I }}" placeholder="Enter current (A)"> (in A)
+            </div>
+
+            <div>
+                <span class="label">Resistance:</span>
+                <input type="text" name="Resistence" value="{{ R }}" placeholder="Enter resistance (Ω)"> (in Ω)
+            </div>
+
+            <div>
+                <span class="label">Power:</span>
+                <input type="text" name="Power" value="{{ Power }}" readonly> W
+            </div>
+
+            <div>
+                <input type="submit" value="Calculate">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+```
+<details>
+<summary> APP.CSS</summary>
+
+ ```css
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.box {
+    width: 500px;
+    min-height: 300px;
+    font-size: 18px;
+    background: rgb(99, 237, 118);
+    border-radius: 15px;
+    box-shadow: rgba(239, 5, 24, 0.35) 0px 5px 15px;
+    padding: 25px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 6px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #999;
+    font-size: 16px;
+    text-align: center;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+.label {
+    font-weight: bold;
+}
+```
 ## SERVER SIDE PROCESSING:
 
+<details>
+<summary> Django Files</summary>
+
+<details>
+<summary> views.py</summary>
+
+```python
+from django.shortcuts import render
+
+def powerlamp(request):
+    context = {}
+    context['Power'] = ""
+    context['I'] = ""
+    context['R'] = ""
+    if request.method == 'POST':
+        print("POST method is used")
+        I = request.POST.get('Intensity', '')
+        R = request.POST.get('Resistence', '')
+        print('Intensity=', I)
+        print('Resistence=', R)
+        Power = int(I) * int(I) * int(R)
+        context['Power'] = Power
+        context['I'] = I
+        context['R'] = R
+        print('Power=', Power)
+    return render(request, 'power.html', context)
+</details>
+```
+
+<details>
+<summary>urls.py (app)</summary>
+
+```python
+from django.shortcuts import render
+
+def powerlamp(request):
+    context = {}
+    context['Power'] = ""
+    context['I'] = ""
+    context['R'] = ""
+    if request.method == 'POST':
+        print("POST method is used")
+        I = request.POST.get('Intensity', '')
+        R = request.POST.get('Resistence', '')
+        print('Intensity=', I)
+        print('Resistence=', R)
+        Power = int(I) * int(I) * int(R)
+        context['Power'] = Power
+        context['I'] = I
+        context['R'] = R
+        print('Power=', Power)
+    return render(request, 'power.html', context)
+</details>
+```
+<details>
+<summary>urls.py (project)</summary>
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('pcalc.urls')),
+]
+</details>
+```
+</details>
 
 ## HOMEPAGE:
+
+<img width="1919" height="1158" alt="P_web" src="https://github.com/user-attachments/assets/b3a3296d-ee50-47b2-a222-dc2e97ae7586" />
+
 
 
 ## RESULT:
