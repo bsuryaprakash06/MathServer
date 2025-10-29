@@ -209,6 +209,9 @@ urlpatterns = [
 
 <img width="1919" height="1158" alt="P_web" src="https://github.com/user-attachments/assets/b3a3296d-ee50-47b2-a222-dc2e97ae7586" />
 
+## OUTPUT:
+
+<img width="1567" height="161" alt="image" src="https://github.com/user-attachments/assets/42f8a613-b4e8-466e-b095-3127a6dfc24e" />
 
 
 ## RESULT:
